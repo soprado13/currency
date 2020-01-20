@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, ScrollView, View} from 'react-native';
+import {ActivityIndicator, ScrollView, View, Button} from 'react-native';
 import InputCurrency from './components/InputCurrency';
 import OutputCurrency from './components/OutputCurrency';
 
@@ -10,12 +10,25 @@ class App extends React.Component {
             isLoading: true,
             currencyValue: '',
             newValue: '0',
-            outputItems: [{id: 1}, {id: 2}, {id: 3}]
+            outputItems: [{id: 0}]
         }
     }
 
     setNewValue = (newValue) => {
         this.setState({newValue})
+    };
+
+    newItem = () => {
+        let i = this.state.outputItems.length;
+        let temp = { id: i };
+        this.state.outputItems.push(temp);
+        this.setState({outputItems: this.state.outputItems});
+        console.log(this.state.outputItems)
+    };
+
+    removeItem = (id) => {
+
+        this.setState({outputItems: this.state.outputItems.filter(i => i.id != id)})
     };
 
     componentDidMount() {
@@ -54,10 +67,16 @@ class App extends React.Component {
 
         return (
             <ScrollView>
-                <InputCurrency data={this.state.data.rates} setNewValue={this.setNewValue} valueField={this.state.newValue}/>
-                {this.state.outputItems.map( i => {
-                    return <OutputCurrency list={this.state.data.rates} valueField={this.state.newValue}/>
+                <InputCurrency data={this.state.data.rates} setNewValue={this.setNewValue}
+                               valueField={this.state.newValue}/>
+                {this.state.outputItems.map(i => {
+                    return <OutputCurrency list={this.state.data.rates} valueField={this.state.newValue} id={i.id} removeItem={this.removeItem}/>
                 })}
+                <Button
+                    style={{width: 100, height: 100, borderRadius: 100, fontSize: 50}}
+                    title="+"
+                    onPress={this.newItem}
+                />
             </ScrollView>
         );
     }

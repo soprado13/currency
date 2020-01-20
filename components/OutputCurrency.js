@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {View, Text, StyleSheet, Button, ScrollView} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Picker } from 'native-base'
 
@@ -7,7 +7,11 @@ class OutputCurrency extends React.Component {
     state={
         currency: Object.entries(this.props.list)[0],
         course: '1'
-    }
+    };
+    onRemoveItem = () => {
+        this.props.removeItem(this.props.id)
+    };
+
     itemSelect() {
         return (Object.keys(this.props.list).map((input) => {
                 return(
@@ -19,6 +23,12 @@ class OutputCurrency extends React.Component {
     render() {
         return(
             <View style={styles.row}>
+                <Button
+                    style={{flex: 1}}
+                    color={'orange'}
+                    title="-"
+                    onPress={this.onRemoveItem}
+                />
                 <Text style={styles.currencyOutput}>
                    {(Number(this.props.valueField) * parseFloat(this.state.course).toFixed(2))}
                 </Text>
