@@ -9,9 +9,12 @@
   },
   "dependencies": {
     "expo": "~36.0.0",
+    "native-base": "^2.13.8",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-picker-dropdown": "^0.1.2",
+    "react-native-picker-select": "^6.3.4",
     "react-native-web": "~0.11.7"
   },
   "devDependencies": {

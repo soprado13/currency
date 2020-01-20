@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, Picker} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { Picker } from 'native-base'
 
 class OutputCurrency extends React.Component {
     state={
@@ -20,9 +22,11 @@ class OutputCurrency extends React.Component {
                 <Text style={styles.currencyOutput}>
                    {(Number(this.props.valueField) * parseFloat(this.state.course).toFixed(2))}
                 </Text>
+
                 <Picker
+                    placeholder={this.state.currency[0]}
                     selectedValue={this.state.currency}
-                    style={{height: 50, width: 100}}
+                    iosIcon={<Ionicons name="ios-arrow-down" />}
                     onValueChange={(itemValue, itemIndex) =>
                     {this.setState({currency: itemValue, course: this.props.list[itemValue]})}
                     }>
@@ -38,17 +42,16 @@ export default OutputCurrency
 const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
-        padding: 50,
+        padding: 20,
         alignItems: 'center'
     },
     currencyOutput: {
-        flex: 3,
+        flex: 2,
         padding: 10,
         borderColor: '#444444',
         borderWidth: 1,
     },
     currency: {
-        flex: 1,
-        textAlign: 'center'
+        flex: 1
     }
 });

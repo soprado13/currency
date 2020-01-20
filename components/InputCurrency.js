@@ -41,18 +41,17 @@ export default InputCurrency
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
     },
     row: {
         flexDirection: 'row',
-        padding: 50,
+        paddingVertical: 40,
+        paddingHorizontal: 20,
         alignItems: 'center'
     },
     currencyInput: {
         flex: 3,
-        height: 50,
         borderColor: '#444444',
         borderWidth: 1,
         padding: 10,
@@ -68,7 +67,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     currency: {
-        flex: 1,
         textAlign: 'center'
     }
 });

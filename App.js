@@ -10,7 +10,7 @@ class App extends React.Component {
             isLoading: true,
             currencyValue: '',
             newValue: '0',
-            outputItems: [{id: 1},{id: 2}, {id:3}]
+            outputItems: [{id: 1}, {id: 2}, {id: 3}]
         }
     }
 
