@@ -11,7 +11,7 @@ class InputCurrency extends React.Component{
     onChangeText = (e) => {
         this.props.setNewValue(e)
     };
-    onTextFocus = (e) => {
+    onTextFocus = () => {
         this.props.setNewValue('')
     };
 

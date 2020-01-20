@@ -23,12 +23,11 @@ class App extends React.Component {
         let temp = { id: i };
         this.state.outputItems.push(temp);
         this.setState({outputItems: this.state.outputItems});
-        console.log(this.state.outputItems)
     };
 
     removeItem = (id) => {
 
-        this.setState({outputItems: this.state.outputItems.filter(i => i.id != id)})
+        this.setState({outputItems: this.state.outputItems.filter(i => i.id !== id)})
     };
 
     componentDidMount() {
