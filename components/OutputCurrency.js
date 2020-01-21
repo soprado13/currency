@@ -30,7 +30,7 @@ class OutputCurrency extends React.Component {
                     onPress={this.onRemoveItem}
                 />
                 <Text style={styles.currencyOutput}>
-                   {(Number(this.props.valueField) * parseFloat(this.state.course).toFixed(2))}
+                   {((Number(this.props.valueField) *  parseFloat(this.state.course)).toFixed(2))}
                 </Text>
 
                 <Picker

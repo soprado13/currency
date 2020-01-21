@@ -2,11 +2,16 @@ import React, {Component} from 'react';
 import {
     StyleSheet,
     View,
-    Text,
     TextInput,
 } from 'react-native';
+import {Picker} from "native-base";
+import {Ionicons} from "@expo/vector-icons";
 
 class InputCurrency extends React.Component{
+
+    state ={
+        currency: Object.entries(this.props.data)[0]
+    };
 
     onChangeText = (e) => {
         this.props.setNewValue(e)
@@ -14,6 +19,14 @@ class InputCurrency extends React.Component{
     onTextFocus = () => {
         this.props.setNewValue('')
     };
+
+    itemSelect() {
+        return (Object.keys(this.props.data).map((input) => {
+                return(
+                    <Picker.Item label={input} value={input} key={input}/>
+                )
+            })
+        )}
 
     render() {
         return (
@@ -28,9 +41,15 @@ class InputCurrency extends React.Component{
                         onChangeText={this.onChangeText}
                         value={this.props.valueField}
                     />
-                    <View style={styles.pickerContainer}>
-                        <Text>{Object.keys(this.props.data)[0]}</Text>
-                    </View>
+                    <Picker
+                        placeholder={this.state.currency[0]}
+                        selectedValue={this.state.currency}
+                        iosIcon={<Ionicons name="ios-arrow-down" />}
+                        onValueChange={(itemValue, itemIndex) =>
+                        {this.setState({currency: itemValue})}
+                        }>
+                        {this.itemSelect()}
+                    </Picker>
                 </View>
             </View >
         );
@@ -51,7 +70,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     currencyInput: {
-        flex: 3,
+        flex: 2,
         borderColor: '#444444',
         borderWidth: 1,
         padding: 10,
@@ -59,14 +78,5 @@ const styles = StyleSheet.create({
     pickerContainer: {
         flex: 1,
         alignItems: 'center'
-    },
-    currencyOutput: {
-        flex: 3,
-        padding: 10,
-        borderColor: '#444444',
-        borderWidth: 1,
-    },
-    currency: {
-        textAlign: 'center'
     }
 });

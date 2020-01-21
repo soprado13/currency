@@ -10,7 +10,8 @@ class App extends React.Component {
             isLoading: true,
             currencyValue: '',
             newValue: '0',
-            outputItems: [{id: 0}]
+            outputItems: [{id: 0}],
+            currency: 'USD'
         }
     }
 
@@ -19,14 +20,13 @@ class App extends React.Component {
     };
 
     newItem = () => {
-        let i = this.state.outputItems.length;
+        let i = this.state.outputItems[this.state.outputItems.length - 1].id + 1 || 0;
         let temp = { id: i };
         this.state.outputItems.push(temp);
         this.setState({outputItems: this.state.outputItems});
     };
 
     removeItem = (id) => {
-
         this.setState({outputItems: this.state.outputItems.filter(i => i.id !== id)})
     };
 
@@ -45,16 +45,6 @@ class App extends React.Component {
             });
     }
 
-
-    currencyList() {
-        return (Object.entries(this.state.data.rates).map((input) => {
-                return (
-                    <OutputCurrency data={input} list={this.state.data.rates} valueField={this.state.newValue}/>
-                )
-            })
-        )
-    }
-
     render() {
         if (this.state.isLoading) {
             return (
@@ -67,9 +57,9 @@ class App extends React.Component {
         return (
             <ScrollView>
                 <InputCurrency data={this.state.data.rates} setNewValue={this.setNewValue}
-                               valueField={this.state.newValue}/>
+                               valueField={this.state.newValue} getCurrency={this.getCurrency}/>
                 {this.state.outputItems.map(i => {
-                    return <OutputCurrency list={this.state.data.rates} valueField={this.state.newValue} id={i.id} removeItem={this.removeItem}/>
+                    return <OutputCurrency list={this.state.data.rates} valueField={this.state.newValue} key={i.id} id={i.id} removeItem={this.removeItem}/>
                 })}
                 <Button
                     style={{width: 100, height: 100, borderRadius: 100, fontSize: 50}}
