@@ -23,7 +23,7 @@ class InputCurrency extends React.Component{
     itemSelect() {
         return (Object.keys(this.props.data).map((input) => {
                 return(
-                    <Picker.Item label={input} value={input} key={input}/>
+                    <Picker.Item label={input} value={input} key={input[0]}/>
                 )
             })
         )}
@@ -37,7 +37,6 @@ class InputCurrency extends React.Component{
                         style={styles.currencyInput}
                         placeholder={'Enter Value'}
                         keyboardType={'number-pad'}
-                        onFocus={this.onTextFocus}
                         onChangeText={this.onChangeText}
                         value={this.props.valueField}
                     />

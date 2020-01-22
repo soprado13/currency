@@ -5,8 +5,8 @@ import { Picker } from 'native-base'
 
 class OutputCurrency extends React.Component {
     state={
-        currency: Object.entries(this.props.list)[0],
-        course: '1',
+        currency: 'EUR',
+        course: this.props.list['EUR'],
     };
     onRemoveItem = () => {
         this.props.removeItem(this.props.id)
@@ -29,6 +29,7 @@ class OutputCurrency extends React.Component {
 
     render() {
         return(
+
             <View style={styles.row}>
                 <Button
                     style={{flex: 1}}

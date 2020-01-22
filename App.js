@@ -21,7 +21,7 @@ class App extends React.Component {
     };
 
     newItem = () => {
-        let i = this.state.outputItems[this.state.outputItems.length - 1].id + 1 || 0;
+        let i = this.state.outputItems.length;
         let temp = { id: i };
         this.state.outputItems.push(temp);
         this.setState({outputItems: this.state.outputItems});
