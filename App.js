@@ -7,6 +7,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: null,
             isLoading: true,
             currencyValue: '',
             newValue: '0',
@@ -16,7 +17,7 @@ class App extends React.Component {
     }
 
     setNewValue = (newValue) => {
-        this.setState({newValue})
+        this.setState({newValue: newValue})
     };
 
     newItem = () => {
@@ -30,8 +31,12 @@ class App extends React.Component {
         this.setState({outputItems: this.state.outputItems.filter(i => i.id !== id)})
     };
 
+    setInputCurrency = (itemValue) => {
+        this.setState( {currency: itemValue} )
+    };
+
     componentDidMount() {
-        return fetch('https://api.exchangerate-api.com/v4/latest/USD')
+        return fetch('https://api.exchangerate-api.com/v4/latest/' + this.state.currency)
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
@@ -43,7 +48,23 @@ class App extends React.Component {
             .catch((error) => {
                 console.error(error);
             });
-    }
+    };
+
+    componentDidUpdate(prevProps, prevState,) {
+        if (prevState.currency !== this.state.currency){
+            return fetch('https://api.exchangerate-api.com/v4/latest/' + this.state.currency)
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    this.setState({
+                        data: responseJson
+                    }, function () {
+                    });
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+    };
 
     render() {
         if (this.state.isLoading) {
@@ -53,11 +74,10 @@ class App extends React.Component {
                 </View>
             )
         }
-
         return (
             <ScrollView>
                 <InputCurrency data={this.state.data.rates} setNewValue={this.setNewValue}
-                               valueField={this.state.newValue} getCurrency={this.getCurrency}/>
+                               valueField={this.state.newValue} setInputCurrency={this.setInputCurrency}/>
                 {this.state.outputItems.map(i => {
                     return <OutputCurrency list={this.state.data.rates} valueField={this.state.newValue} key={i.id} id={i.id} removeItem={this.removeItem}/>
                 })}

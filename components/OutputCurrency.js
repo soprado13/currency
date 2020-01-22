@@ -6,20 +6,27 @@ import { Picker } from 'native-base'
 class OutputCurrency extends React.Component {
     state={
         currency: Object.entries(this.props.list)[0],
-        course: '1'
+        course: '1',
     };
     onRemoveItem = () => {
         this.props.removeItem(this.props.id)
     };
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.list !== this.props.list){
+            this.setState({course: this.props.list[this.state.currency]})
+        }
+    }
+
     itemSelect() {
         return (Object.keys(this.props.list).map((input) => {
-                return(
+                        return(
                     <Picker.Item label={input} value={input} key={input}/>
                 )
 
             })
         )}
+
     render() {
         return(
             <View style={styles.row}>
@@ -39,6 +46,7 @@ class OutputCurrency extends React.Component {
                     iosIcon={<Ionicons name="ios-arrow-down" />}
                     onValueChange={(itemValue, itemIndex) =>
                     {this.setState({currency: itemValue, course: this.props.list[itemValue]})}
+
                     }>
                     {this.itemSelect()}
                 </Picker>

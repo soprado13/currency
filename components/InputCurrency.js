@@ -46,7 +46,8 @@ class InputCurrency extends React.Component{
                         selectedValue={this.state.currency}
                         iosIcon={<Ionicons name="ios-arrow-down" />}
                         onValueChange={(itemValue, itemIndex) =>
-                        {this.setState({currency: itemValue})}
+                        {this.setState({currency: itemValue});
+                        this.props.setInputCurrency(itemValue)}
                         }>
                         {this.itemSelect()}
                     </Picker>
