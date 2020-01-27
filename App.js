@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {ActivityIndicator, ScrollView, View, Button} from 'react-native';
 import InputCurrency from './components/InputCurrency';
 import OutputCurrency from './components/OutputCurrency';
+import { h,w } from './constants'
 
 class App extends React.Component {
     constructor(props) {
@@ -69,24 +70,28 @@ class App extends React.Component {
     render() {
         if (this.state.isLoading) {
             return (
-                <View style={{flex: 1, padding: 100, justifyContent: 'center', alignItems: 'center'}}>
-                    <ActivityIndicator/>
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <ActivityIndicator size="large" color="#0000ff"/>
                 </View>
             )
         }
         return (
-            <ScrollView>
+            <View style={{width: w, height: h}}>
                 <InputCurrency data={this.state.data.rates} setNewValue={this.setNewValue}
                                valueField={this.state.newValue} setInputCurrency={this.setInputCurrency}/>
-                {this.state.outputItems.map(i => {
-                    return <OutputCurrency list={this.state.data.rates} valueField={this.state.newValue} key={i.id} id={i.id} removeItem={this.removeItem}/>
-                })}
                 <Button
-                    style={{width: 100, height: 100, borderRadius: 100, fontSize: 50}}
+                    style={{position: 'fixed', bottom: 0}}
                     title="+"
                     onPress={this.newItem}
                 />
-            </ScrollView>
+                <ScrollView >
+
+                    {this.state.outputItems.map(i => {
+                        return <OutputCurrency list={this.state.data.rates} valueField={this.state.newValue} key={i.id} id={i.id} removeItem={this.removeItem}/>
+                    })}
+
+                </ScrollView>
+            </View>
         );
     }
 }
