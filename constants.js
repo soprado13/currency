@@ -1,5 +1,5 @@
-import Dimensions from "react-native-web/src/exports/Dimensions";
+import {Dimensions} from "react-native";
 
 const win = Dimensions.get('window');
-export const h = win.height;
-export const w = win.width;
+export const h = Math.round(win.height);
+export const w = Math.round(win.width);

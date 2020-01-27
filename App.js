@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, ScrollView, View, Button} from 'react-native';
+import {ActivityIndicator, ScrollView, View, TouchableHighlight, Text, StyleSheet, StatusBar} from 'react-native';
 import InputCurrency from './components/InputCurrency';
 import OutputCurrency from './components/OutputCurrency';
-import { h,w } from './constants'
+import { h, w } from './constants'
 
 class App extends React.Component {
     constructor(props) {
@@ -74,26 +74,48 @@ class App extends React.Component {
                     <ActivityIndicator size="large" color="#0000ff"/>
                 </View>
             )
-        }
+        };
         return (
-            <View style={{width: w, height: h}}>
-                <InputCurrency data={this.state.data.rates} setNewValue={this.setNewValue}
-                               valueField={this.state.newValue} setInputCurrency={this.setInputCurrency}/>
-                <Button
-                    style={{position: 'fixed', bottom: 0}}
-                    title="+"
-                    onPress={this.newItem}
-                />
-                <ScrollView >
+            <View style={styles.container} keyboardShouldPersistTaps='handled'>
+                <StatusBar barStyle='light-content' hidden={false}/>
+                <ScrollView>
+                    <InputCurrency data={this.state.data.rates} setNewValue={this.setNewValue}
+                                   valueField={this.state.newValue} setInputCurrency={this.setInputCurrency}/>
 
                     {this.state.outputItems.map(i => {
                         return <OutputCurrency list={this.state.data.rates} valueField={this.state.newValue} key={i.id} id={i.id} removeItem={this.removeItem}/>
                     })}
-
                 </ScrollView>
+                <TouchableHighlight
+                    style={styles.addItem}
+                    onPress={this.newItem}
+                >
+                    <Text style={{color: '#ffffff'}}>+</Text>
+                </TouchableHighlight>
             </View>
+
         );
     }
 }
 
 export default App
+
+const styles = StyleSheet.create({
+    container: {
+        width: w,
+        height: h,
+        paddingTop: 50,
+        paddingLeft: 20,
+    },
+    addItem: {
+        width: 50,
+        height: 50,
+        borderRadius: 50,
+        backgroundColor: "green",
+        position: 'absolute',
+        bottom: 5,
+        right: 5,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+});

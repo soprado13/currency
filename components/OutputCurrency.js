@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, Button, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Picker } from 'native-base'
 
@@ -29,25 +29,24 @@ class OutputCurrency extends React.Component {
 
     render() {
         return(
-
             <View style={styles.row}>
-                <Button
-                    style={{flex: 1}}
-                    color={'orange'}
-                    title="-"
+                <TouchableHighlight
+                    style={styles.remove}
                     onPress={this.onRemoveItem}
-                />
+                >
+                    <Text style={{color: 'white'}}>-</Text>
+                </TouchableHighlight>
                 <Text style={styles.currencyOutput}>
                    {((Number(this.props.valueField) *  parseFloat(this.state.course)).toFixed(2))}
                 </Text>
 
                 <Picker
+                    style={styles.setCurrency}
                     placeholder={this.state.currency[0]}
                     selectedValue={this.state.currency}
                     iosIcon={<Ionicons name="ios-arrow-down" />}
                     onValueChange={(itemValue, itemIndex) =>
                     {this.setState({currency: itemValue, course: this.props.list[itemValue]})}
-
                     }>
                     {this.itemSelect()}
                 </Picker>
@@ -61,16 +60,26 @@ export default OutputCurrency
 const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
-        padding: 20,
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingRight: 55
     },
     currencyOutput: {
-        flex: 2,
+        flex: 1,
         padding: 10,
         borderColor: '#444444',
         borderWidth: 1,
+        borderRadius: 20
     },
-    currency: {
+    setCurrency: {
         flex: 1
+    },
+    remove: {
+        width: 30,
+        height: 30,
+        borderRadius: 30,
+        backgroundColor: 'red',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 5
     }
 });

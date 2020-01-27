@@ -30,28 +30,26 @@ class InputCurrency extends React.Component{
 
     render() {
         return (
-            <View  style={styles.container}
-                  keyboardShouldPersistTaps='handled'>
-                <View style={styles.row}>
-                    <TextInput
-                        style={styles.currencyInput}
-                        placeholder={'Enter Value'}
-                        keyboardType={'number-pad'}
-                        onChangeText={this.onChangeText}
-                        value={this.props.valueField}
-                    />
-                    <Picker
-                        placeholder={this.state.currency[0]}
-                        selectedValue={this.state.currency}
-                        iosIcon={<Ionicons name="ios-arrow-down" />}
-                        onValueChange={(itemValue, itemIndex) =>
-                        {this.setState({currency: itemValue});
-                        this.props.setInputCurrency(itemValue)}
-                        }>
-                        {this.itemSelect()}
-                    </Picker>
-                </View>
-            </View >
+            <View style={styles.row}>
+                <TextInput
+                    style={styles.currencyInput}
+                    placeholder={'Enter Value'}
+                    keyboardType={'number-pad'}
+                    onChangeText={this.onChangeText}
+                    value={this.props.valueField}
+                />
+                <Picker
+                    style={styles.picker}
+                    placeholder={this.state.currency[0]}
+                    selectedValue={this.state.currency}
+                    iosIcon={<Ionicons name="ios-arrow-down" />}
+                    onValueChange={(itemValue, itemIndex) =>
+                    {this.setState({currency: itemValue});
+                    this.props.setInputCurrency(itemValue)}
+                    }>
+                    {this.itemSelect()}
+                </Picker>
+            </View>
         );
     }
 }
@@ -59,24 +57,20 @@ class InputCurrency extends React.Component{
 export default InputCurrency
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#fff',
-        alignItems: 'center',
-    },
     row: {
         flexDirection: 'row',
-        paddingVertical: 40,
-        paddingHorizontal: 20,
-        alignItems: 'center'
+        paddingRight: 55,
+        paddingLeft: 35,
+        paddingBottom: 20
     },
     currencyInput: {
-        flex: 2,
+        flex: 1,
+        padding: 10,
         borderColor: '#444444',
         borderWidth: 1,
-        padding: 10,
+        borderRadius: 50
     },
-    pickerContainer: {
-        flex: 1,
-        alignItems: 'center'
+    picker: {
+        flex: 1
     }
 });
