@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ActivityIndicator, ScrollView, View, TouchableHighlight, Text, StyleSheet, StatusBar} from 'react-native';
+import {ActivityIndicator, ScrollView, View, TouchableHighlight, Text, StyleSheet, StatusBar, SafeAreaView} from 'react-native';
 import InputCurrency from './components/InputCurrency';
 import OutputCurrency from './components/OutputCurrency';
 import { h, w } from './constants'
@@ -77,7 +77,9 @@ class App extends React.Component {
         };
         return (
             <View style={styles.container} keyboardShouldPersistTaps='handled'>
-                <StatusBar barStyle='light-content' hidden={false}/>
+                <SafeAreaView>
+                    <StatusBar hidden={false} barStyle='dark-content' bakgroundColor='white'/>
+                </SafeAreaView>
                 <ScrollView>
                     <InputCurrency data={this.state.data.rates} setNewValue={this.setNewValue}
                                    valueField={this.state.newValue} setInputCurrency={this.setInputCurrency}/>
@@ -104,7 +106,6 @@ const styles = StyleSheet.create({
     container: {
         width: w,
         height: h,
-        paddingTop: 50,
         paddingLeft: 20,
     },
     addItem: {

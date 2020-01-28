@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingRight: 55,
         paddingLeft: 35,
-        paddingBottom: 20
+        paddingBottom: 20,
+        paddingTop: 50
     },
     currencyInput: {
         flex: 1,
