@@ -22,9 +22,8 @@ class App extends React.Component {
     };
 
     newItem = () => {
-        let i = this.state.outputItems.length;
-        let temp = { id: i };
-        this.state.outputItems.push(temp);
+        let i = this.state.outputItems[this.state.outputItems.length - 1].id + 1;
+        this.state.outputItems.push({ id: i});
         this.setState({outputItems: this.state.outputItems});
     };
 
@@ -57,7 +56,7 @@ class App extends React.Component {
                 .then((response) => response.json())
                 .then((responseJson) => {
                     this.setState({
-                        data: responseJson
+                        data: responseJson,
                     }, function () {
                     });
                 })
@@ -68,6 +67,7 @@ class App extends React.Component {
     };
 
     render() {
+        console.log(this.state.outputItems);
         if (this.state.isLoading) {
             return (
                 <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
