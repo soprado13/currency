@@ -34,7 +34,7 @@ class InputCurrency extends React.Component{
                 <TextInput
                     style={styles.currencyInput}
                     placeholder={'Enter Value'}
-                    keyboardType={'numeric'}
+                    keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'numeric'}
                     onChangeText={this.onChangeText}
                     value={this.props.valueField}
                 />
